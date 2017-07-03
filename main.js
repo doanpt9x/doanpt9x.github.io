@@ -11,11 +11,11 @@ socket.on('LIST_USER', arrUser => {
         const { ten, peerId } = user;
         $('#listUser').append(`<li id="${peerId}">${ten}</li>`)
     });
-    socket.on('USER_DISCONNECT',peerId=>{
+    socket.on('USER_DISCONNECT', peerId => {
         $(`#${peerId}`).remove();
     })
 })
-socket.on('REGISTER_FAILED',()=>{
+socket.on('REGISTER_FAILED', () => {
     alert('Vui long chon user khac');
 });
 function openStream() {
@@ -29,7 +29,7 @@ function playStream(idVideoTag, stream) {
 }
 // openStream().then(stream => playStream('localStream', stream));
 
-var peer = new Peer({ key: '3xurgkfaieapp66r' });
+var peer = new Peer({ key: 'peerjs', host: 'peerwebrtc.herokuapp.com', secure: true, port: 443 });
 peer.on('open', id => {
     $('#mypeer').append(id);
     $('#btnSignUp').click(() => {
@@ -55,7 +55,7 @@ peer.on('call', call => {
     })
 })
 
-$('#listUser').on('click','li',function(){
+$('#listUser').on('click', 'li', function () {
     console.log($(this).attr('id'));
     const id = $(this).attr('id');
     openStream().then(stream => {
